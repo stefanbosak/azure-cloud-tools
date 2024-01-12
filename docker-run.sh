@@ -28,7 +28,7 @@ if [ ${#} -eq 0 ]; then
   docker container run --platform ${TARGETPLATFORM} -ti -v /dev:/dev --network=host --rm --name "${CONTAINER_NAME}" "${CONTAINER_IMAGE}"
 else
   # when any argument recognized only execute requested application/command inside container (oneshot action)
-  docker container run --platform ${TARGETPLATFORM} --entrypoint "/bin/sh" -ti -v /dev:/dev --network=host --rm --name "${CONTAINER_NAME}" "${CONTAINER_IMAGE}" -c "${*}"
+  docker container run --platform ${TARGETPLATFORM} --entrypoint "/bin/sh" --network=host --rm --name "${CONTAINER_NAME}" "${CONTAINER_IMAGE}" -c "${*}"
 fi
 
 if [ ${?} -ne 0 ]; then

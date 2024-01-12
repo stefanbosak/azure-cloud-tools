@@ -19,6 +19,6 @@ for tool in ${TOOLS}; do
   fi
 done
 
-echo "AZ_VERSION:"
+echo "AZ_CLI_VERSION:"
 curl -sSL "${URI_PREFIX}/v2/azure-cli/tags/list" | jq --raw-output '.tags|.[]' | awk -F"/" '!($0 ~ /latest|\-|\{/){print $NF}' | sort -V | tail -n ${VERSIONS_AMOUNT}
 echo ";"
