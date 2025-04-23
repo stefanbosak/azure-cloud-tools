@@ -29,7 +29,7 @@ export CONTAINER_USER=${CONTAINER_USER:-"user"}
 export CONTAINER_GROUP=${CONTAINER_GROUP:-"user"}
 
 # AZ CLI version
-export AZ_CLI_VERSION=${AZ_CLI_VERSION:-2.55.0}
+export AZ_CLI_VERSION=${AZ_CLI_VERSION:-2.71.0}
 
 # Docker container entities
 export CONTAINER_NAME=${CONTAINER_NAME:-"azure-cli"}

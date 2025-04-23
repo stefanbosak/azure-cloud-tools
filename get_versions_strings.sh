@@ -20,5 +20,5 @@ for tool in ${TOOLS}; do
 done
 
 echo "AZ_CLI_VERSION:"
-curl -sSL "${URI_PREFIX}/v2/azure-cli/tags/list" | jq --raw-output '.tags|.[]' | awk -F"/" '!($0 ~ /latest|\-|\{/){print $NF}' | sort -V | tail -n ${VERSIONS_AMOUNT}
+curl -sSL "${URI_PREFIX}/v2/azure-cli/tags/list" | jq --raw-output '.tags|.[] | select(test("^\\d+\\.\\d+\\.\\d+$"))' | sort -V | tail -n ${VERSIONS_AMOUNT}
 echo ";"
