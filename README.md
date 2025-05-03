@@ -39,4 +39,4 @@ Read detail inside script. There are two ways of installation:
 
 __scripts and files:__
 - [standalone-install.sh](standalone-install.sh): standalone installer script
-- [![build_status_badge](../../actions/workflows/standalone-test-amd64-arm64.yml/badge.svg?branch=main)](.github/workflows/standalone-test-amd64.yml): GitHub Actions workflow file for automation of standalone testing (amd64)
+- [![build_status_badge](../../actions/workflows/standalone-test-amd64-arm64.yml/badge.svg?branch=main)](.github/workflows/standalone-test-amd64.yml): GitHub Actions workflow file for automation of standalone testing
