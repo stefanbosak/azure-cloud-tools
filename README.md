@@ -29,8 +29,7 @@ Docker run script is simple wrapped for on-demand execution of related tools.
 __scripts and files:__
 - [docker-run.sh](docker-run.sh): wrapper as Docker runner script
 - [docker-versions.sh](docker-versions.sh): wrapper for showing tools versions
-- [![build_status_badge](https://github.com/stefanbosak/azure-cloud-tools/actions/workflows/docker-image-test-amd64-arm64.yml/badge.svg?branch=main)](.github/workflows/docker-image-test-amd64-arm64.yml): GitHub Actions workflow file for automation of Docker image testing (amd64, arm64)
-  - MacOS Docker is covered via Colima (prerequisite; installation might take long time, sometimes it is not deterministic and execution could fail, situation might change in the future)
+- [![build_status_badge](../../actions/workflows/docker-image-test-amd64-arm64.yml/badge.svg?branch=main)](.github/workflows/docker-image-test-amd64-arm64.yml): GitHub Actions workflow file for automation of Docker image testing (amd64, arm64)
 
 ### Standalone installer approach
 Dedicated installer wrapper script is covering all of above mentioned tools.
@@ -40,4 +39,4 @@ Read detail inside script. There are two ways of installation:
 
 __scripts and files:__
 - [standalone-install.sh](standalone-install.sh): standalone installer script
-- [![build_status_badge](https://github.com/stefanbosak/azure-cloud-tools/actions/workflows/standalone-test-amd64.yml/badge.svg?branch=main)](.github/workflows/standalone-test-amd64.yml): GitHub Actions workflow file for automation of standalone testing (amd64)
+- [![build_status_badge](../../actions/workflows/standalone-test-amd64-arm64.yml/badge.svg?branch=main)](.github/workflows/standalone-test-amd64.yml): GitHub Actions workflow file for automation of standalone testing (amd64)
