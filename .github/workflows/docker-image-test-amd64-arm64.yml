@@ -9,8 +9,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-on-linux-x86:
-    runs-on: ubuntu-latest
+  test-on-linux:
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        runner: [ubuntu-latest, ubuntu-24.04-arm]
     permissions:
       contents: read
       packages: write
@@ -21,23 +24,6 @@ jobs:
 
     steps:
       - name: 'Docker image test (amd64)'
-        shell: bash
-        run: |
-          echo -ne "AZ_CLI_VERSION="
-          az --version | head -n 1 | sed -E 's/.* ([^ ]+)$/\1/'
-
-  test-on-linux-arm:
-    runs-on: ubuntu-24.04-arm
-    permissions:
-      contents: read
-      packages: write
-    container:
-      image: mcr.microsoft.com/azure-cli:latest
-      options:
-        -v /dev:/dev
-
-    steps:
-      - name: 'Docker image test (arm64)'
         shell: bash
         run: |
           echo -ne "AZ_CLI_VERSION="
