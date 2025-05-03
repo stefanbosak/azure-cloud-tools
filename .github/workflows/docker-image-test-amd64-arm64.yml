@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           echo -ne "AZ_CLI_VERSION="
-          az --version | head -n 1 | awk '{print $NF}'
+          az --version | head -n 1 | sed -E 's/.* ([^ ]+)$/\1/'
 
   test-on-linux-arm:
     runs-on: ubuntu-24.04-arm
@@ -41,4 +41,4 @@ jobs:
         shell: bash
         run: |
           echo -ne "AZ_CLI_VERSION="
-          az --version | head -n 1 | awk '{print $NF}'
+          az --version | head -n 1 | sed -E 's/.* ([^ ]+)$/\1/'
