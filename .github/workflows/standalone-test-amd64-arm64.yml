@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-on-linux-x86:
-    runs-on: ubuntu-latest
+  test-on-linux:
+    runs-on: [ubuntu-latest, ubuntu-24.04-arm]
     permissions:
       contents: read
       packages: write
@@ -18,39 +18,15 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@main
-      - name: 'Install required packages (amd64)'
+      - name: 'Install required packages'
         run: |
           sudo apt-get update && \
           sudo apt-get -y --no-install-recommends install python3-full && \
           sudo apt-get clean && sudo rm -rf "/var/lib/apt/lists/*"
-      - name: 'Perform standalone install (amd64)'
+      - name: 'Perform standalone install'
         run: |
           ./standalone-install.sh
-      - name: 'Azure cloud tools test (amd64)'
-        shell: bash
-        run: |
-          source ./venv/bin/activate
-          echo -ne "AZ_CLI_VERSION="
-          az --version | head -n 1 | awk '{print $NF}'
-
-  test-on-linux-arm:
-    runs-on: ubuntu-24.04-arm
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@main
-      - name: 'Install required packages (arm64)'
-        run: |
-          sudo apt-get update && \
-          sudo apt-get -y --no-install-recommends install python3-full && \
-          sudo apt-get clean && sudo rm -rf "/var/lib/apt/lists/*"
-      - name: 'Perform standalone install (arm64)'
-        run: |
-          ./standalone-install.sh
-      - name: 'Azure cloud tools test (arm64)'
+      - name: 'Azure cloud tools test'
         shell: bash
         run: |
           source ./venv/bin/activate
