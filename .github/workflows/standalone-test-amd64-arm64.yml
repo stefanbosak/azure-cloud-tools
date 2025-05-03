@@ -10,7 +10,10 @@ on:
 
 jobs:
   test-on-linux:
-    runs-on: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+      strategy:
+        matrix:
+          runner: [ubuntu-latest, ubuntu-24.04-arm]
     permissions:
       contents: read
       packages: write
