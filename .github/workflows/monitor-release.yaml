@@ -1,0 +1,30 @@
+name: 'Monitor release'
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-prerelease:
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+      actions: write
+
+    steps:
+      - name: 'Monitor release'
+        uses: stefanbosak/gh-actions/monitor-release@main
+        with:
+          projects: |
+            [
+              {"owner":"ansible","repo":"ansible"},
+              {"owner":"helm","repo":"helm"},
+              {"owner":"derailed","repo":"k9s"},
+              {"owner":"kubernetes","repo":"kops"},
+              {"owner":"kubernetes","repo":"kubernetes"},
+              {"owner":"hashicorp","repo":"terraform"},
+              {"owner":"gruntwork-io","repo":"terragrunt"},
+              {"owner":"cert-manager","repo":"cmctl"},
+              {"owner":"Azure","repo":"azure-cli"}
+            ]
