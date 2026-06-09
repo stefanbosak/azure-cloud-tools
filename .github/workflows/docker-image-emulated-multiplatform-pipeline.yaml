@@ -24,7 +24,7 @@ on:
         description: 'K9S_CLI_VERSION'
         required: false
         type: string
-        default: 'v0.50.18'
+        default: 'v0.51.0'
       KOPS_CLI_VERSION:
         description: 'KOPS_CLI_VERSION'
         required: false
