@@ -23,9 +23,9 @@
 | **Kops** | [`v1.35.1`](https://github.com/kubernetes/kops/releases/tag/v1.35.1) |
 | **Kubectl** | [`v1.36.1`](https://github.com/kubernetes/kubernetes/releases/tag/v1.36.1) |
 | **Terraform** | [`1.15.6`](https://github.com/hashicorp/terraform/releases/tag/v1.15.6) |
-| **Terragrunt** | [`v1.0.7`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.0.7) |
+| **Terragrunt** | [`v1.0.8`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.0.8) |
 
-> 🔄 Last updated: 2026-06-10T13:29:13Z · [Build #25](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/27279378229)
+> 🔄 Last updated: 2026-06-10T21:04:56Z · [Build #26](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/27305979192)
 <!-- VERSION_INFO_END -->
 
 ---
