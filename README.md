@@ -21,11 +21,11 @@
 | **Helm** | [`v4.2.0`](https://github.com/helm/helm/releases/tag/v4.2.0) |
 | **K9s** | [`v0.51.0`](https://github.com/derailed/k9s/releases/tag/v0.51.0) |
 | **Kops** | [`v1.35.1`](https://github.com/kubernetes/kops/releases/tag/v1.35.1) |
-| **Kubectl** | [`v1.36.1`](https://github.com/kubernetes/kubernetes/releases/tag/v1.36.1) |
+| **Kubectl** | [`v1.37.0-alpha.1`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0-alpha.1) |
 | **Terraform** | [`1.15.6`](https://github.com/hashicorp/terraform/releases/tag/v1.15.6) |
 | **Terragrunt** | [`v1.0.8`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.0.8) |
 
-> 🔄 Last updated: 2026-06-10T21:04:56Z · [Build #26](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/27305979192)
+> 🔄 Last updated: 2026-06-11T05:51:06Z · [Build #27](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/27326498977)
 <!-- VERSION_INFO_END -->
 
 ---
