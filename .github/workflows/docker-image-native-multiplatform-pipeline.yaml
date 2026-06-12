@@ -19,7 +19,7 @@ on:
         description: 'HELM_CLI_VERSION'
         required: false
         type: string
-        default: 'v4.2.0'
+        default: 'v4.2.1'
       K9S_CLI_VERSION:
         description: 'K9S_CLI_VERSION'
         required: false
@@ -44,7 +44,7 @@ on:
         description: 'TERRAGRUNT_CLI_VERSION'
         required: false
         type: string
-        default: 'v1.0.8'
+        default: 'v1.1.0-rc1'
       AZURE_CLI_VERSION:
         description: 'AZURE_CLI_VERSION'
         required: false
