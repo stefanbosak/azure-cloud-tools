@@ -34,7 +34,7 @@ on:
         description: 'KUBECTL_CLI_VERSION'
         required: false
         type: string
-        default: 'v1.37.0-alpha.1'
+        default: 'v1.36.2'
       TERRAFORM_CLI_VERSION:
         description: 'TERRAFORM_CLI_VERSION'
         required: false
