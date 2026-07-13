@@ -16,9 +16,9 @@
 <!-- VERSION_INFO_START -->
 | Component | Version |
 |-----------|---------|
-| **Ansible** | [`v2.21.2rc1`](https://github.com/ansible/ansible/releases/tag/v2.21.2rc1) |
+| **Ansible** | [`v2.21.2`](https://github.com/ansible/ansible/releases/tag/v2.21.2) |
 | **Azure CLI** | [`2.88.0`](https://github.com/Azure/azure-cli/releases/tag/azure-cli-2.88.0) |
-| **Bicep CLI** | [`v0.45.6`](https://github.com/Azure/bicep/releases/tag/v0.45.6) |
+| **Bicep CLI** | [`v0.45.15`](https://github.com/Azure/bicep/releases/tag/v0.45.15) |
 | **cert-manager CLI** | [`v2.5.0`](https://github.com/cert-manager/cmctl/releases/tag/v2.5.0) |
 | **Helm** | [`v4.2.3`](https://github.com/helm/helm/releases/tag/v4.2.3) |
 | **K9s** | [`v0.51.0`](https://github.com/derailed/k9s/releases/tag/v0.51.0) |
@@ -28,7 +28,7 @@
 | **Terraform** | [`1.15.8`](https://github.com/hashicorp/terraform/releases/tag/v1.15.8) |
 | **Terragrunt** | [`v1.1.0`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.0) |
 
-> 🔄 Last updated: 2026-07-12T23:49:20+02:00 · [Build #99](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/29210394480)
+> 🔄 Last updated: 2026-07-12T23:58:08+02:00 · [Build #100](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/29282607076)
 <!-- VERSION_INFO_END -->
 
 ---

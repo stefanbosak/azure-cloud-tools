@@ -18,7 +18,7 @@ on:
         description: 'ANSIBLE_CLI_VERSION'
         required: false
         type: string
-        default: 'v2.21.2rc1'
+        default: 'v2.21.2'
       AZURE_CLI_VERSION:
         description: 'AZURE_CLI_VERSION'
         required: false
@@ -28,7 +28,7 @@ on:
         description: 'BICEP_CLI_VERSION'
         required: false
         type: string
-        default: 'v0.45.6'
+        default: 'v0.45.15'
       CM_CTL_CLI_VERSION:
         description: 'CM_CTL_CLI_VERSION'
         required: false
