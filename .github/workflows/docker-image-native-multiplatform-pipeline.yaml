@@ -743,6 +743,7 @@ jobs:
               ('Kops',             os.environ['KOPS_CLI_RELEASE_VERSION'],       'https://github.com/kubernetes/kops/releases/tag/'                       + os.environ['KOPS_CLI_RELEASE_VERSION']),
               ('Kubectl',          os.environ['KUBECTL_CLI_RELEASE_VERSION'],    'https://github.com/kubernetes/kubernetes/releases/tag/'                 + os.environ['KUBECTL_CLI_RELEASE_VERSION']),
               ('Kustomize',        os.environ['KUSTOMIZE_CLI_RELEASE_VERSION'],  'https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize/'   + os.environ['KUSTOMIZE_CLI_RELEASE_VERSION']),
+              ('SwarmCLI',         os.environ['SWARM_CLI_RELEASE_VERSION'],      'https://github.com/Eldara-Tech/swarmcli/releases/tag/'                  + os.environ['SWARM_CLI_RELEASE_VERSION']),
               ('Terraform',        os.environ['TERRAFORM_CLI_RELEASE_VERSION'],  'https://github.com/hashicorp/terraform/releases/tag/v'                  + os.environ['TERRAFORM_CLI_RELEASE_VERSION']),
               ('Terragrunt',       os.environ['TERRAGRUNT_CLI_RELEASE_VERSION'], 'https://github.com/gruntwork-io/terragrunt/releases/tag/'               + os.environ['TERRAGRUNT_CLI_RELEASE_VERSION'])
           ]
@@ -773,6 +774,7 @@ jobs:
               'KOPS_CLI_VERSION':       os.environ['KOPS_CLI_RELEASE_VERSION'],
               'KUBECTL_CLI_VERSION':    os.environ['KUBECTL_CLI_RELEASE_VERSION'],
               'KUSTOMIZE_CLI_VERSION':  os.environ['KUSTOMIZE_CLI_RELEASE_VERSION'],
+              'SWARM_CLI_VERSION':      os.environ['SWARM_CLI_RELEASE_VERSION'],
               'TERRAFORM_CLI_VERSION':  os.environ['TERRAFORM_CLI_RELEASE_VERSION'],
               'TERRAGRUNT_CLI_VERSION': os.environ['TERRAGRUNT_CLI_RELEASE_VERSION']
           }
