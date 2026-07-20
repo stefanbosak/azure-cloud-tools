@@ -40,6 +40,9 @@ ARG KUBECTL_CLI_VERSION=v1.36.1
 # Kustomize version
 ARG KUSTOMIZE_CLI_VERSION=v5.8.1
 
+# SwarmCLI version
+ARG SWARM_CLI_VERSION=v1.12.0
+
 # Terraform version
 ARG TERRAFORM_CLI_VERSION=1.15.5
 
@@ -268,6 +271,28 @@ RUN mkdir -p "/usr/local/bin/" && tar -xvf "${WORKSPACE_ROOT_DIR}/kustomize_${KU
 
 
 # container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-swarmcli-builder
+
+LABEL stage="azure-cloud-tools-swarmcli-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool SwarmCLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool SwarmCLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG SWARM_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# install SwarmCLI
+RUN mkdir -p "/usr/local/bin/" && \
+    curl -fsSL https://swarmcli.io/install.sh | \
+    sh -s -- ce /usr/local/bin "${SWARM_CLI_VERSION}"
+
+
+# container as builder for preparing Azure cloud tools
 FROM azure-cloud-tools-builder AS azure-cloud-tools-terraform-builder
 
 LABEL stage="azure-cloud-tools-terraform-builder" \
@@ -387,6 +412,7 @@ COPY --from=azure-cloud-tools-k9s-builder "/usr/local/bin/" "/usr/local/bin/"
 COPY --from=azure-cloud-tools-kops-builder "/usr/local/bin/" "/usr/local/bin/"
 COPY --from=azure-cloud-tools-kubectl-builder "/usr/local/bin/" "/usr/local/bin/"
 COPY --from=azure-cloud-tools-kustomize-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-swarmcli-builder "/usr/local/bin/" "/usr/local/bin/"
 COPY --from=azure-cloud-tools-terraform-builder "/usr/local/bin/" "/usr/local/bin/"
 COPY --from=azure-cloud-tools-terragrunt-builder "/usr/local/bin/" "/usr/local/bin/"
 

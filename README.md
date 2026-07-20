@@ -25,6 +25,7 @@
 | **Kops** | [`v1.36.0`](https://github.com/kubernetes/kops/releases/tag/v1.36.0) |
 | **Kubectl** | [`v1.37.0-alpha.3`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0-alpha.3) |
 | **Kustomize** | [`v5.8.1`](https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize/v5.8.1) |
+| **SwarmCLI** | [`v1.12.0`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v1.12.0) |
 | **Terraform** | [`1.16.0-alpha20260715`](https://github.com/hashicorp/terraform/releases/tag/v1.16.0-alpha20260715) |
 | **Terragrunt** | [`v1.1.1`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.1) |
 
@@ -52,6 +53,7 @@ This repository provides a fully automated preparation of <span style="color: #0
 | [kops CLI](https://kops.sigs.k8s.io/) | <span style="color: #0969da;">Kubernetes cluster management</span> |
 | [kubectl CLI](https://kubernetes.io/docs/reference/kubectl/) | <span style="color: #0969da;">Kubernetes command-line tool</span> |
 | [kustomize](https://kustomize.io/) | <span style="color: #0969da;">Kubernetes native configuration management</span> |
+| [SwarmCLI](https://github.com/Eldara-Tech/swarmcli) | <span style="color: #0969da;">Terminal UI for Docker Swarm</span> |
 | [Terraform CLI](https://developer.hashicorp.com/terraform/cli) | <span style="color: #1a7f37;">Infrastructure as Code tool</span> |
 | [Terragrunt CLI](https://terragrunt.gruntwork.io/) | <span style="color: #1a7f37;">Terraform wrapper for DRY configurations</span> |
 
