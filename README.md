@@ -23,13 +23,13 @@
 | **Helm** | [`v4.2.3`](https://github.com/helm/helm/releases/tag/v4.2.3) |
 | **K9s** | [`v0.51.0`](https://github.com/derailed/k9s/releases/tag/v0.51.0) |
 | **Kops** | [`v1.36.0`](https://github.com/kubernetes/kops/releases/tag/v1.36.0) |
-| **Kubectl** | [`v1.37.0-alpha.3`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0-alpha.3) |
+| **Kubectl** | [`v1.37.0-beta.0`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0-beta.0) |
 | **Kustomize** | [`v5.8.1`](https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize/v5.8.1) |
 | **SwarmCLI** | [`v1.13.0-rc1`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v1.13.0-rc1) |
 | **Terraform** | [`1.16.0-alpha20260715`](https://github.com/hashicorp/terraform/releases/tag/v1.16.0-alpha20260715) |
 | **Terragrunt** | [`v1.1.1`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.1) |
 
-> 🔄 Last updated: 2026-07-21T00:17:45+02:00 · [Build #110](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/29783476129)
+> 🔄 Last updated: 2026-07-21T00:21:24+02:00 · [Build #111](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/29791502537)
 <!-- VERSION_INFO_END -->
 
 ---
