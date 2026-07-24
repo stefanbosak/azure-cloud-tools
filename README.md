@@ -29,7 +29,7 @@
 | **Terraform** | [`1.16.0-beta1`](https://github.com/hashicorp/terraform/releases/tag/v1.16.0-beta1) |
 | **Terragrunt** | [`v1.1.1`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.1) |
 
-> 🔄 Last updated: 2026-07-24T09:06:35+02:00 · [Build #124](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/30080998057)
+> 🔄 Last updated: 2026-07-24T11:03:55+02:00 · [Build #125](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/30110062588)
 <!-- VERSION_INFO_END -->
 
 ---
