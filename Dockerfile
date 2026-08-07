@@ -399,6 +399,7 @@ RUN mkdir -p "/usr/local/bin/" && \
       bc \
       ca-certificates \
       curl \
+      ccze \
       dnsutils \
       git \
       gnupg \
