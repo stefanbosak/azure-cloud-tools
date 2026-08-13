@@ -1,0 +1,527 @@
+# user in container
+ARG CONTAINER_USER=user
+ARG CONTAINER_GROUP=user
+
+ARG CONTAINER_USER_ID=1000
+ARG CONTAINER_GROUP_ID=1000
+
+# set location of workspace directory
+# (temporary space within container image)
+ARG WORKSPACE_ROOT_DIR="/home/${CONTAINER_USER}"
+
+# Debian release and options
+ARG DEBIAN_RELEASE=trixie-debian13-dev
+ARG DEBIAN_FRONTEND=noninteractive
+
+# ansible CLI tools versions
+ARG ANSIBLE_CLI_VERSION=v2.21.3
+
+# Azure CLI version
+ARG AZURE_CLI_VERSION=2.89.1
+
+# Bicep CLI version
+ARG BICEP_CLI_VERSION=v0.46.1
+
+# cert-manager CLI version
+ARG CM_CTL_CLI_VERSION=v2.5.0
+
+# Helm version
+ARG HELM_CLI_VERSION=v4.2.3
+
+# kubectl version
+ARG K9S_CLI_VERSION=v0.51.0
+
+# kops version
+ARG KOPS_CLI_VERSION=v1.36.1
+
+# kubectl version
+ARG KUBECTL_CLI_VERSION=v1.37.0-rc.0
+
+# Kustomize version
+ARG KUSTOMIZE_CLI_VERSION=v5.8.1
+
+# SwarmCLI version
+ARG SWARM_CLI_VERSION=v1.12.0
+
+# Terraform version
+ARG TERRAFORM_CLI_VERSION=1.16.0-beta2
+
+# OpenTofu version
+ARG OPENTOFU_CLI_VERSION=1.12.5
+
+# Terragrunt version
+ARG TERRAGRUNT_CLI_VERSION=v1.1.2
+
+# container as builder for preparing Azure cloud tools
+FROM dhi.io/debian-base:${DEBIAN_RELEASE} AS azure-cloud-tools-builder
+
+LABEL stage="azure-cloud-tools-builder" \
+      description="Debian-based container builder for preparing Azure cloud tools" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tools" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG DEBIAN_FRONTEND
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# install required packages and additional applications
+RUN apt-get update && \
+    apt-get -y --no-install-recommends install ca-certificates binutils curl unzip && \
+    apt-get clean && rm -rf "/var/lib/apt/lists/*"
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-ansible-cli-builder
+
+LABEL stage="azure-cloud-tools-ansible-cli-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool ansible" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool ansible" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG ANSIBLE_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# install prerequisites (uv)
+RUN apt-get -y --no-install-recommends install python-is-python3 && \
+    apt-get clean && rm -rf "/var/lib/apt/lists/*" && \
+    curl -LsSf "https://astral.sh/uv/install.sh" \
+      | UV_INSTALL_DIR=/usr/local/bin bash
+
+# download and install ansible tool
+RUN export UV_TOOL_BIN_DIR=/usr/local/bin && \
+    export UV_TOOL_DIR=/usr/local/share/uv/tools && \
+    uv tool install ansible-core==${ANSIBLE_CLI_VERSION}
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-bicep-cli-builder
+
+LABEL stage="azure-cloud-tools-bicep-cli-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool bicep" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool bicep" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG BICEP_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download and install bicep tool
+RUN uri=$(echo "https://github.com/Azure/bicep/releases/download/${BICEP_CLI_VERSION}/bicep-${TARGETOS}-${TARGETARCH}" | sed 's/amd64/x64/g') && curl -sSL "${uri}" -o "${WORKSPACE_ROOT_DIR}/bicep" && \
+    mkdir -p "/usr/local/bin/" && install -v -o root -g root -m 0755 "${WORKSPACE_ROOT_DIR}/bicep" "/usr/local/bin/bicep"
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-cm-builder
+
+LABEL stage="azure-cloud-tools-cm-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool cert-manager CLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool cert-manager CLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG CM_CTL_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download cert-manager
+ADD "https://github.com/cert-manager/cmctl/releases/download/${CM_CTL_CLI_VERSION}/cmctl_linux_${TARGETARCH}" "${WORKSPACE_ROOT_DIR}/cmctl_linux_${TARGETARCH}"
+
+# install cert-manager
+RUN mkdir -p "/usr/local/bin/" && install -v -o root -g root -m 0755 "${WORKSPACE_ROOT_DIR}/cmctl_linux_${TARGETARCH}" "/usr/local/bin/kubectl-cert_manager"
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-cnpg-builder
+
+LABEL stage="azure-cloud-tools-cnpg-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool CNPG CLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool CNPG CLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# install kubectl CNPG plugin
+RUN mkdir -p "/usr/local/bin/" && \
+    curl -sSfL https://github.com/cloudnative-pg/cloudnative-pg/raw/main/hack/install-cnpg-plugin.sh | \
+    sh -s -- -b /usr/local/bin
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-helm-builder
+
+LABEL stage="azure-cloud-tools-helm-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool HELM CLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool HELM CLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG HELM_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download HELM archive file
+ADD "https://get.helm.sh/helm-${HELM_CLI_VERSION}-${TARGETOS}-${TARGETARCH}.tar.gz" "${WORKSPACE_ROOT_DIR}/"
+
+# install HELM
+RUN mkdir -p "/usr/local/bin/" && tar -xvf "${WORKSPACE_ROOT_DIR}/helm-${HELM_CLI_VERSION}-${TARGETOS}-${TARGETARCH}.tar.gz" -C "/usr/local/bin" --strip-components 1 --no-anchored "helm"
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-k9s-builder
+
+LABEL stage="azure-cloud-tools-k9s-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool k9s CLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool k9s CLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG K9S_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download k9s CLI binary file
+ADD "https://github.com/derailed/k9s/releases/download/${K9S_CLI_VERSION}/k9s_Linux_${TARGETARCH}.tar.gz" "${WORKSPACE_ROOT_DIR}/"
+
+# install k9s
+RUN mkdir -p "/usr/local/bin/" && tar -xvf "${WORKSPACE_ROOT_DIR}/k9s_Linux_${TARGETARCH}.tar.gz" -C "/usr/local/bin" --no-anchored "k9s"
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-kops-builder
+
+LABEL stage="azure-cloud-tools-kops-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool kops CLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool kops CLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG KOPS_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download kubectl CLI binary file
+ADD "https://github.com/kubernetes/kops/releases/download/${KOPS_CLI_VERSION}/kops-${TARGETOS}-${TARGETARCH}" "${WORKSPACE_ROOT_DIR}/"
+
+# install kubectl
+RUN mkdir -p "/usr/local/bin/" && install -v -o root -g root -m 0755 "${WORKSPACE_ROOT_DIR}/kops-${TARGETOS}-${TARGETARCH}" "/usr/local/bin/kops"
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-kubectl-builder
+
+LABEL stage="azure-cloud-tools-kubectl-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool kubectl CLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool kubectl CLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG KUBECTL_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download kubectl CLI binary file
+ADD "https://dl.k8s.io/release/${KUBECTL_CLI_VERSION}/bin/linux/${TARGETARCH}/kubectl" "${WORKSPACE_ROOT_DIR}/"
+
+# install kubectl
+RUN mkdir -p "/usr/local/bin/" && install -v -o root -g root -m 0755 "${WORKSPACE_ROOT_DIR}/kubectl" "/usr/local/bin/"
+
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-kustomize-builder
+
+LABEL stage="azure-cloud-tools-kustomize-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool kustomize CLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool kustomize CLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG KUSTOMIZE_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download kustomize archive
+ADD "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/${KUSTOMIZE_CLI_VERSION}/kustomize_${KUSTOMIZE_CLI_VERSION}_${TARGETOS}_${TARGETARCH}.tar.gz" "${WORKSPACE_ROOT_DIR}/"
+
+# install kustomize
+RUN mkdir -p "/usr/local/bin/" && tar -xvf "${WORKSPACE_ROOT_DIR}/kustomize_${KUSTOMIZE_CLI_VERSION}_${TARGETOS}_${TARGETARCH}.tar.gz" -C "/usr/local/bin" --no-anchored "kustomize"
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-swarmcli-builder
+
+LABEL stage="azure-cloud-tools-swarmcli-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool SwarmCLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool SwarmCLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG SWARM_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# install SwarmCLI
+RUN mkdir -p "/usr/local/bin/" && \
+    curl -fsSL https://swarmcli.io/install.sh | \
+    sh -s -- ce /usr/local/bin "${SWARM_CLI_VERSION}"
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-terraform-builder
+
+LABEL stage="azure-cloud-tools-terraform-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool terraform" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool terraform" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG TERRAFORM_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download TF CLI archive file
+ADD "https://releases.hashicorp.com/terraform/${TERRAFORM_CLI_VERSION}/terraform_${TERRAFORM_CLI_VERSION}_${TARGETOS}_${TARGETARCH}.zip" "${WORKSPACE_ROOT_DIR}/"
+
+# install TF CLI binary
+RUN mkdir -p "/usr/local/bin/" && unzip "terraform_${TERRAFORM_CLI_VERSION}_${TARGETOS}_${TARGETARCH}.zip" -d "/usr/local/bin/"
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-terragrunt-builder
+
+LABEL stage="azure-cloud-tools-terragrunt-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool terragrunt CLI" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool terragrunt CLI" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG TERRAGRUNT_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download kubectl CLI binary file
+ADD "https://github.com/gruntwork-io/terragrunt/releases/download/${TERRAGRUNT_CLI_VERSION}/terragrunt_${TARGETOS}_${TARGETARCH}" "${WORKSPACE_ROOT_DIR}/"
+
+# install terragrunt CLI
+RUN mkdir -p "/usr/local/bin/" && install -v -o root -g root -m 0755 "${WORKSPACE_ROOT_DIR}/terragrunt_${TARGETOS}_${TARGETARCH}" "/usr/local/bin/terragrunt"
+
+
+# container as builder for preparing Azure cloud tools
+FROM azure-cloud-tools-builder AS azure-cloud-tools-opentofu-builder
+
+LABEL stage="azure-cloud-tools-opentofu-builder" \
+      description="Debian-based container builder for preparing Azure cloud tool OpenTofu" \
+      org.opencontainers.image.description="Debian-based container builder for preparing Azure cloud tool OpenTofu" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG OPENTOFU_CLI_VERSION
+
+ARG WORKSPACE_ROOT_DIR
+WORKDIR "${WORKSPACE_ROOT_DIR}"
+
+# download OpenTofu CLI archive file
+ADD "https://github.com/opentofu/opentofu/releases/download/v${OPENTOFU_CLI_VERSION}/tofu_${OPENTOFU_CLI_VERSION}_${TARGETOS}_${TARGETARCH}.zip" "${WORKSPACE_ROOT_DIR}/"
+
+# install OpenTofu CLI binary
+RUN mkdir -p "/usr/local/bin/" && unzip "tofu_${OPENTOFU_CLI_VERSION}_${TARGETOS}_${TARGETARCH}.zip" -d "/usr/local/bin/"
+
+
+# container as final image for providing Azure cloud tools
+FROM dhi.io/debian-base:${DEBIAN_RELEASE} AS azure-cloud-tools-image
+
+LABEL stage="azure-cloud-tools-image" \
+      description="Debian-based container with Azure cloud tools" \
+      org.opencontainers.image.description="Debian-based container with Azure cloud tools" \
+      org.opencontainers.image.url=https://github.com/stefanbosak/azure-cloud-tools \
+      org.opencontainers.image.source=https://github.com/stefanbosak/azure-cloud-tools
+
+ARG TARGETOS
+ARG TARGETARCH
+
+# user in container
+ARG CONTAINER_USER
+ARG CONTAINER_GROUP
+
+ARG CONTAINER_USER_ID
+ARG CONTAINER_GROUP_ID
+
+ARG AZURE_CLI_VERSION
+
+ARG DEBIAN_FRONTEND
+
+ARG HOME_ROOT_DIR="/home/${CONTAINER_USER}"
+
+WORKDIR "${HOME_ROOT_DIR}"
+
+RUN mkdir -p "/usr/local/bin/" && \
+    apt-get update \
+    && apt-get install -y --no-install-recommends \
+      bash \
+      bash-completion \
+      bc \
+      ca-certificates \
+      curl \
+      ccze \
+      dnsutils \
+      git \
+      gnupg \
+      gzip \
+      iproute2 \
+      iputils-ping \
+      jq \
+      kmod \
+      libicu-dev \
+      lsof \
+      openssh-client \
+      pigz \
+      procps \
+      psmisc \
+      python-is-python3 \
+      python3-venv \
+      python3-argcomplete \
+      ripgrep \
+      rsync \
+      socat \
+      unzip \
+      wget \
+      whois \
+    && apt-get clean \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# transfer tools from builders
+COPY --from=azure-cloud-tools-ansible-cli-builder "/usr/local/bin" "/usr/local/bin"
+COPY --from=azure-cloud-tools-ansible-cli-builder "/usr/local/share/uv/tools" "/usr/local/share/uv/tools"
+COPY --from=azure-cloud-tools-bicep-cli-builder "/usr/local/bin" "/usr/local/bin"
+COPY --from=azure-cloud-tools-cm-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-cnpg-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-helm-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-k9s-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-kops-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-kubectl-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-kustomize-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-swarmcli-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-terraform-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-terragrunt-builder "/usr/local/bin/" "/usr/local/bin/"
+COPY --from=azure-cloud-tools-opentofu-builder "/usr/local/bin/" "/usr/local/bin/"
+
+# install azure CLI tooling
+RUN echo "deb [signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ bookworm main" | \
+    tee -a /etc/apt/sources.list.d/azure-cli.list && \
+    curl -sLS https://packages.microsoft.com/keys/microsoft.asc | \
+    gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && \
+    apt-get update && apt-get install azure-cli=${AZURE_CLI_VERSION}-1~bookworm && \
+    apt-get clean && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
+
+# install DiD (Docker in Docker)
+# - DinD via QEMU on ARM64 is not supported
+#   (ARM64 requires ARM64 kernel from host system which is not present on AMD64 host)
+RUN curl -fsSL https://test.docker.com | sh && \
+    if ! getent group docker > /dev/null 2>&1; then \
+      groupadd docker; \
+    fi
+
+# setup user and group
+RUN if getent group "${CONTAINER_GROUP_ID}" > /dev/null; then \
+      _existing_group="$(getent group "${CONTAINER_GROUP_ID}" | cut -d: -f1)"; \
+      if [ "${_existing_group}" != "${CONTAINER_GROUP}" ]; then \
+        groupmod -n "${CONTAINER_GROUP}" "${_existing_group}"; \
+      fi; \
+    else \
+      groupadd --gid "${CONTAINER_GROUP_ID}" "${CONTAINER_GROUP}"; \
+    fi \
+    && if getent passwd "${CONTAINER_USER_ID}" > /dev/null; then \
+         _existing_user="$(getent passwd "${CONTAINER_USER_ID}" | cut -d: -f1)"; \
+         if [ "${_existing_user}" != "${CONTAINER_USER}" ]; then \
+           if [ -d "/home/${_existing_user}" ]; then \
+             mv "/home/${_existing_user}" "${HOME_ROOT_DIR}"; \
+           fi; \
+           usermod -d "${HOME_ROOT_DIR}" -l "${CONTAINER_USER}" "${_existing_user}"; \
+         fi; \
+       else \
+         useradd \
+           --uid "${CONTAINER_USER_ID}" \
+           --gid "${CONTAINER_GROUP_ID}" \
+           --groups "${CONTAINER_GROUP}" \
+           -M -d "${HOME_ROOT_DIR}" \
+           -s /bin/bash \
+           "${CONTAINER_USER}"; \
+       fi \
+    && chown -R "${CONTAINER_USER}:${CONTAINER_GROUP}" "${HOME_ROOT_DIR}" \
+    && usermod -aG docker "${CONTAINER_USER}"
+
+# enable tools completions (required to run given tool to generate completion file content)
+RUN ln -s /usr/local/bin/kubectl-cert_manager /usr/local/bin/cmctl && \
+    cmctl completion bash > /usr/share/bash-completion/completions/cmctl && \
+    ln -s /usr/local/bin/kubectl-cnpg /usr/local/bin/cnpgctl && \
+    cnpgctl completion bash > /usr/share/bash-completion/completions/cnpgctl && \
+    sed -i 's/kubectl-cnpg/cnpgctl/g' /usr/share/bash-completion/completions/cnpgctl && \
+    helm completion bash > "/usr/share/bash-completion/completions/helm" && \
+    k9s completion bash > "/usr/share/bash-completion/completions/k9s" && \
+    kops completion bash > "/usr/share/bash-completion/completions/kops" && \
+    kubectl completion bash > "/usr/share/bash-completion/completions/kubectl" && \
+    cp "/usr/share/bash-completion/completions/kubectl" "/usr/share/bash-completion/completions/k" && \
+    sed -i 's/kubectl/k/g' "/usr/share/bash-completion/completions/k" && \
+    ln -s /usr/local/bin/kubectl /usr/local/bin/k && \
+    kustomize completion bash > "/usr/share/bash-completion/completions/kustomize" && \
+    echo "complete -C terraform terraform" > "/usr/share/bash-completion/completions/terraform" && \
+    echo "complete -C terragrunt terragrunt" > "/usr/share/bash-completion/completions/terragrunt" && \
+    echo "complete -C tofu tofu" > "/usr/share/bash-completion/completions/tofu" && \
+    activate-global-python-argcomplete
+
+# container user and group
+USER "${CONTAINER_USER}:${CONTAINER_GROUP}"
+
+WORKDIR "${HOME_ROOT_DIR}"
+
+RUN cp /etc/skel/.bashrc /etc/skel/.profile "${HOME_ROOT_DIR}"
+
+# open shell
+CMD ["bash"]
