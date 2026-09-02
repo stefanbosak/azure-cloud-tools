@@ -16,21 +16,21 @@
 <!-- VERSION_INFO_START -->
 | Component | Version |
 |-----------|---------|
-| **Ansible** | [`v2.21.3`](https://github.com/ansible/ansible/releases/tag/v2.21.3) |
-| **Azure CLI** | [`2.89.1`](https://github.com/Azure/azure-cli/releases/tag/azure-cli-2.89.1) |
+| **Ansible** | [`v2.21.4rc1`](https://github.com/ansible/ansible/releases/tag/v2.21.4rc1) |
+| **Azure CLI** | [`2.90.0`](https://github.com/Azure/azure-cli/releases/tag/azure-cli-2.90.0) |
 | **Bicep CLI** | [`v0.46.1`](https://github.com/Azure/bicep/releases/tag/v0.46.1) |
 | **cert-manager CLI** | [`v2.5.0`](https://github.com/cert-manager/cmctl/releases/tag/v2.5.0) |
-| **Helm** | [`v4.2.4`](https://github.com/helm/helm/releases/tag/v4.2.4) |
+| **Helm** | [`v4.3.0-rc.1`](https://github.com/helm/helm/releases/tag/v4.3.0-rc.1) |
 | **K9s** | [`v0.51.0`](https://github.com/derailed/k9s/releases/tag/v0.51.0) |
-| **Kops** | [`v1.36.2`](https://github.com/kubernetes/kops/releases/tag/v1.36.2) |
-| **Kubectl** | [`v1.37.0-rc.0`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0-rc.0) |
+| **Kops** | [`v1.37.0-beta.1`](https://github.com/kubernetes/kops/releases/tag/v1.37.0-beta.1) |
+| **Kubectl** | [`v1.37.0`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0) |
 | **Kustomize** | [`v5.8.1`](https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize/v5.8.1) |
-| **OpenTofu** | [`1.12.5`](https://github.com/opentofu/opentofu/releases/tag/v1.12.5) |
-| **SwarmCLI** | [`v1.14.0-rc3`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v1.14.0-rc3) |
-| **Terraform** | [`1.17.0-alpha20260812`](https://github.com/hashicorp/terraform/releases/tag/v1.17.0-alpha20260812) |
-| **Terragrunt** | [`v1.1.3`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.3) |
+| **OpenTofu** | [`1.13.0-beta1`](https://github.com/opentofu/opentofu/releases/tag/v1.13.0-beta1) |
+| **SwarmCLI** | [`v2.0.0-rc4`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v2.0.0-rc4) |
+| **Terraform** | [`1.16.1`](https://github.com/hashicorp/terraform/releases/tag/v1.16.1) |
+| **Terragrunt** | [`v1.1.4`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.4) |
 
-> 🔄 Last updated: 2026-08-13T10:43:04+02:00 · [Build #159](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/31720663320)
+> 🔄 Last updated: 2026-08-13T23:47:32+02:00 · [Build #183](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/33666668929)
 <!-- VERSION_INFO_END -->
 
 ---
