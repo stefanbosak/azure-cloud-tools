@@ -26,11 +26,11 @@
 | **Kubectl** | [`v1.37.0`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0) |
 | **Kustomize** | [`v5.8.1`](https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize/v5.8.1) |
 | **OpenTofu** | [`1.13.0-beta1`](https://github.com/opentofu/opentofu/releases/tag/v1.13.0-beta1) |
-| **SwarmCLI** | [`v2.0.1-rc1`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v2.0.1-rc1) |
+| **SwarmCLI** | [`v2.0.1`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v2.0.1) |
 | **Terraform** | [`1.17.0-beta1`](https://github.com/hashicorp/terraform/releases/tag/v1.17.0-beta1) |
 | **Terragrunt** | [`v1.1.4`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.4) |
 
-> 🔄 Last updated: 2026-09-10T16:25:55+02:00 · [Build #197](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/34501646448)
+> 🔄 Last updated: 2026-09-10T18:27:01+02:00 · [Build #198](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/34514148942)
 <!-- VERSION_INFO_END -->
 
 ---
