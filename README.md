@@ -29,9 +29,9 @@
 | **Sofka** | [`v0.28.3`](https://github.com/nklmilojevic/sofka/releases/tag/v0.28.3) |
 | **SwarmCLI** | [`v2.1.1`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v2.1.1) |
 | **Terraform** | [`1.16.3`](https://github.com/hashicorp/terraform/releases/tag/v1.16.3) |
-| **Terragrunt** | [`v1.1.5`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.5) |
+| **Terragrunt** | [`v1.1.6`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.6) |
 
-> 🔄 Last updated: 2026-09-19T02:57:51+02:00 · [Build #214](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/35415761811)
+> 🔄 Last updated: 2026-09-21T15:40:59+02:00 · [Build #215](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/35611346632)
 <!-- VERSION_INFO_END -->
 
 ---
