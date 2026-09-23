@@ -24,15 +24,15 @@
 | **K9s** | [`v0.51.0`](https://github.com/derailed/k9s/releases/tag/v0.51.0) |
 | **Kops** | [`v1.37.0-beta.1`](https://github.com/kubernetes/kops/releases/tag/v1.37.0-beta.1) |
 | **Kpt** | [`v1.0.0`](https://github.com/kptdev/kpt/releases/tag/v1.0.0) |
-| **Kubectl** | [`v1.37.0`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0) |
+| **Kubectl** | [`v1.37.1`](https://github.com/kubernetes/kubernetes/releases/tag/v1.37.1) |
 | **Kustomize** | [`v5.8.1`](https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize/v5.8.1) |
 | **OpenTofu** | [`1.13.0-rc1`](https://github.com/opentofu/opentofu/releases/tag/v1.13.0-rc1) |
-| **Sofka** | [`v0.28.5`](https://github.com/nklmilojevic/sofka/releases/tag/v0.28.5) |
+| **Sofka** | [`v0.29.0`](https://github.com/nklmilojevic/sofka/releases/tag/v0.29.0) |
 | **SwarmCLI** | [`v2.1.1`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v2.1.1) |
-| **Terraform** | [`1.16.4`](https://github.com/hashicorp/terraform/releases/tag/v1.16.4) |
+| **Terraform** | [`1.17.0-beta2`](https://github.com/hashicorp/terraform/releases/tag/v1.17.0-beta2) |
 | **Terragrunt** | [`v1.1.6`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.6) |
 
-> 🔄 Last updated: 2026-09-23T00:23:19+02:00 · [Build #222](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/35873827647)
+> 🔄 Last updated: 2026-09-23T21:20:26+02:00 · [Build #225](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/35909592605)
 <!-- VERSION_INFO_END -->
 
 ---
