@@ -28,10 +28,10 @@
 | **OpenTofu** | [`1.13.0-rc1`](https://github.com/opentofu/opentofu/releases/tag/v1.13.0-rc1) |
 | **Sofka** | [`v0.28.5`](https://github.com/nklmilojevic/sofka/releases/tag/v0.28.5) |
 | **SwarmCLI** | [`v2.1.1`](https://github.com/Eldara-Tech/swarmcli/releases/tag/v2.1.1) |
-| **Terraform** | [`1.16.3`](https://github.com/hashicorp/terraform/releases/tag/v1.16.3) |
+| **Terraform** | [`1.16.4`](https://github.com/hashicorp/terraform/releases/tag/v1.16.4) |
 | **Terragrunt** | [`v1.1.6`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.1.6) |
 
-> 🔄 Last updated: 2026-09-22T20:33:49+02:00 · [Build #221](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/35791743062)
+> 🔄 Last updated: 2026-09-23T00:23:19+02:00 · [Build #222](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/35873827647)
 <!-- VERSION_INFO_END -->
 
 ---
