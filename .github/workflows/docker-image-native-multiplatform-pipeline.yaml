@@ -23,7 +23,7 @@ on:
         description: 'AZURE_CLI_VERSION'
         required: false
         type: string
-        default: '2.90.0'
+        default: '2.91.0'
       BICEP_CLI_VERSION:
         description: 'BICEP_CLI_VERSION'
         required: false
