@@ -19,7 +19,7 @@
 | **Ansible** | [`v2.22.0rc1`](https://github.com/ansible/ansible/releases/tag/v2.22.0rc1) |
 | **Azure CLI** | [`2.91.0`](https://github.com/Azure/azure-cli/releases/tag/azure-cli-2.91.0) |
 | **Bicep CLI** | [`v0.48.1`](https://github.com/Azure/bicep/releases/tag/v0.48.1) |
-| **cert-manager CLI** | [`v2.6.1`](https://github.com/cert-manager/cmctl/releases/tag/v2.6.1) |
+| **cert-manager CLI** | [`v2.6.2`](https://github.com/cert-manager/cmctl/releases/tag/v2.6.2) |
 | **Helm** | [`v4.3.1`](https://github.com/helm/helm/releases/tag/v4.3.1) |
 | **K9s** | [`v0.51.0`](https://github.com/derailed/k9s/releases/tag/v0.51.0) |
 | **Kops** | [`v1.37.0-beta.1`](https://github.com/kubernetes/kops/releases/tag/v1.37.0-beta.1) |
@@ -32,7 +32,7 @@
 | **Terraform** | [`1.17.0`](https://github.com/hashicorp/terraform/releases/tag/v1.17.0) |
 | **Terragrunt** | [`v1.2.1`](https://github.com/gruntwork-io/terragrunt/releases/tag/v1.2.1) |
 
-> 🔄 Last updated: 2026-10-22T20:29:48+02:00 · [Build #289](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/40018675205)
+> 🔄 Last updated: 2026-10-23T22:25:56+02:00 · [Build #290](https://github.com/stefanbosak/azure-cloud-tools/actions/runs/40530741081)
 <!-- VERSION_INFO_END -->
 
 ---
